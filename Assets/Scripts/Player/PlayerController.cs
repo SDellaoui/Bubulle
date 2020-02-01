@@ -17,22 +17,25 @@ public class PlayerController : MonoBehaviour
 
     [Range(10,90)]
     public float _blowAngle = 10;
-    [Range(5, 10)]
-    public float _blowMaxDistance = 5f;
+    [Range(1, 6)]
+    public float _blowMaxDistance = 2f;
     public LayerMask mask;
 
     public Animator headAnimator;
 
     private int _blowAnimationId = Animator.StringToHash("IsBlowing");
+
+    private Camera _mainCamera;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         m_rb = GetComponent<Rigidbody2D>();
+        _mainCamera = Camera.main;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         UpdateControls();
         UpdateDirection();
@@ -56,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateDirection()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,0));
+        Vector3 mousePos = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,0));
         m_currentLookDirection = (Vector2)mousePos;
         _aimGameObject.transform.right = -((Vector3)m_currentLookDirection - transform.position).normalized;
     }
@@ -67,19 +70,44 @@ public class PlayerController : MonoBehaviour
         {
             headAnimator.SetBool(_blowAnimationId, true);
             
+            Vector3 position = transform.position;
+            
             ContactFilter2D filter = new ContactFilter2D();
             filter.SetLayerMask(mask);
-            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -_aimGameObject.transform.right, _blowMaxDistance, mask, 0f);
-            if(hit.collider != null)
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)position, -_aimGameObject.transform.right, _blowMaxDistance, mask, 0f);
+            
+            if (!hit.collider)
             {
-                Vector2 blowDirection = (((Vector2)hit.collider.transform.position - hit.point) + (Vector2)(hit.collider.transform.position - transform.position)).normalized;
-                float blowFactor = 1 - (Vector3.Distance(hit.collider.transform.position, transform.position) / _blowMaxDistance);
-                hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
+                return;
             }
+            
+            Vector3 colliderPosition = hit.collider.transform.position;
+                
+            Vector2 blowDirection = (((Vector2)colliderPosition - hit.point) + (Vector2)(colliderPosition - position)).normalized;
+            float blowFactor = 1 - (Vector3.Distance(colliderPosition, position) / _blowMaxDistance);
+            hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
         }
         else
         {
             headAnimator.SetBool(_blowAnimationId, false);
         }
+    }
+    
+    void OnDrawGizmos()
+    {
+        if (_mainCamera == null)
+        {
+            return;
+        }
+
+        Color refColor = Gizmos.color;
+        Gizmos.color = Color.blue;
+        
+        Vector3 position = this.transform.position;
+        Vector3 mousePos = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,0));
+        mousePos.z = position.z;
+        
+        Gizmos.DrawLine(position, position + ((mousePos - position).normalized * _blowMaxDistance));
+        Gizmos.color = refColor;
     }
 }
