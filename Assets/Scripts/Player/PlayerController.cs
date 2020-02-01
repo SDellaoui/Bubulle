@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,0));
         m_currentLookDirection = (Vector2)mousePos;
         _aimGameObject.transform.right = ((Vector3)m_currentLookDirection - transform.position).normalized;
-        
     }
 
     private void UpdateBlowBall()

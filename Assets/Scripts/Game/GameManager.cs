@@ -20,22 +20,30 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Private Fields
+    private GameObject m_playerGO;
+    #endregion
+
     public GameObject _playerPrefab;
     public GameObject _ballPrefab;
     public Transform _playerSpawnPoint;
     public Transform _ballSpawnPoint;
 
+    public CameraBehaviour _camera;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
+        
+        m_playerGO = GameObject.Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
         GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
+
+        _camera.SetTarget(m_playerGO);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void RespawnBall()
