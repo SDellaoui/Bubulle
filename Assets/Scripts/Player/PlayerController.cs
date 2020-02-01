@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     [Range(1, 1000)]
     public float _speed = 500;
 
-    [Range(10, 100)]
-    public float _blowForce = 50;
+    [Range(1, 20)]
+    public float _blowForce = 5;
 
     [Range(10,90)]
     public float _blowAngle = 10;
