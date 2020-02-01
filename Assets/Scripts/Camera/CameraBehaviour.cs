@@ -16,7 +16,7 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (m_target != null)
         {
