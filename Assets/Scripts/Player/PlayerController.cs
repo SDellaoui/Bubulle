@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     [Range(1, 1000)]
     public float _speed = 500;
 
-    [Range(10, 100)]
-    public float _blowForce = 50;
+    [Range(1, 20)]
+    public float _blowForce = 5;
 
     [Range(10,90)]
     public float _blowAngle = 10;
@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
                 
                 Vector2 blowDirection = (((Vector2)hit.collider.transform.position - hit.point) + (Vector2)(hit.collider.transform.position - transform.position)).normalized;
                 float blowFactor = 1 - (Vector3.Distance(hit.collider.transform.position, transform.position) / _blowMaxDistance);
-                Debug.Log($"Hitting {hit.collider.gameObject.name} at {hit.point}. blow force : {blowFactor}");
                 hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
             }
         }

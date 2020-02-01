@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +46,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
     }
-
+    public void Win()
+    {
+        Debug.Log("Victory Brudaaaaah ! ");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void RespawnBall()
     {
         GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
