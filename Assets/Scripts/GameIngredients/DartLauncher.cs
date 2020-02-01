@@ -9,6 +9,7 @@ public class DartLauncher : MonoBehaviour
     
     public bool _isActive;
     public float _dartSpawnInterval = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {

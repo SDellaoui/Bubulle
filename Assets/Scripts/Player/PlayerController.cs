@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
                 
                 Vector2 blowDirection = (((Vector2)hit.collider.transform.position - hit.point) + (Vector2)(hit.collider.transform.position - transform.position)).normalized;
                 float blowFactor = 1 - (Vector3.Distance(hit.collider.transform.position, transform.position) / _blowMaxDistance);
-                Debug.Log($"Hitting {hit.collider.gameObject.name} at {hit.point}. blow force : {blowFactor}");
                 hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
             }
         }
