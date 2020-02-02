@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lockX: 0
-  _lockY: 0
+  _lockY: 1
   _cameraFollowSpeed: 5
 --- !u!20 &519420031
 Camera:
