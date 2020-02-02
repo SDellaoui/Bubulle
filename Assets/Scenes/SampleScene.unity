@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &252413521 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 252413521, guid: 5dc7f504c8c042448829e298afd6547c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4308056060083436241}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &373972127
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292cdb8de7f87904a984f59382248846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lockX: 0
+  _lockY: 0
   _cameraFollowSpeed: 5
 --- !u!20 &519420031
 Camera:
@@ -250,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: -10}
+  m_LocalPosition: {x: -1.3, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3459,12 +3455,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &2105269561 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2105269561, guid: 5dc7f504c8c042448829e298afd6547c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4308056060083436241}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4308056060083436241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3472,32 +3462,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252413521, guid: 5dc7f504c8c042448829e298afd6547c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _playerPrefab
-      value: 
-      objectReference: {fileID: 1918335485103915169, guid: 55a34dbbfd38b7b4f8546c664f18e707,
-        type: 3}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _ballPrefab
-      value: 
-      objectReference: {fileID: 3122356310824617430, guid: 7f9b95917b14f9b4f9b557d4cf1b10cb,
-        type: 3}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _playerSpawnPoint
-      value: 
-      objectReference: {fileID: 2105269561}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _ballSpawnPoint
-      value: 
-      objectReference: {fileID: 252413521}
     - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
         type: 3}
       propertyPath: _camera

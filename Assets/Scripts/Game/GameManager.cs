@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Transform _ballSpawnPoint;
 
     public CameraBehaviour _camera;
+    public GameObject _objectiveTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +41,8 @@ public class GameManager : MonoBehaviour
         m_playerGO = GameObject.Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
         m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
 
-        _camera.SetTarget(m_playerGO);
-
+        _camera.SetTarget(_objectiveTarget, true);
+        StartCoroutine("CameraFollowPlayer");
         Fabric.EventManager.Instance.PostEvent("Game_Start");
     }
 
@@ -78,5 +79,12 @@ public class GameManager : MonoBehaviour
     {
         m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
         Debug.Log("new ballonspawned");
+    }
+
+    IEnumerator CameraFollowPlayer()
+    {
+        yield return new WaitForSeconds(2f);
+        _camera.SetTarget(m_playerGO);
+        yield return null;
     }
 }
