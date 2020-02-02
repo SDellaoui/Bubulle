@@ -44,9 +44,10 @@ public class CameraBehaviour : MonoBehaviour
 
         }
     }
-
-    public void SetTarget(GameObject t)
+    public void SetTarget(GameObject t, bool snap = false)
     {
         this.m_target = t;
+        if (snap)
+            transform.position = new Vector3(t.transform.position.x, t.transform.position.y, transform.position.z);
     }
 }
