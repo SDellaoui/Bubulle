@@ -51,11 +51,7 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.R))
         {
-            foreach(GameObject b in GameObject.FindGameObjectsWithTag("Ball"))
-            {
-                Destroy(b);
-            }
-            RespawnBall();
+            DestroyBalloon(false);
         }
     }
     public void Win()
@@ -63,7 +59,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Victory Brudaaaaah ! ");
         Fabric.EventManager.Instance.PostEvent("Game_Level_Complete");
         DestroyBalloon(false);
-        RespawnBall();
+        //RespawnBall();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void DestroyBalloon(bool explode = true)
@@ -75,9 +71,12 @@ public class GameManager : MonoBehaviour
             Fabric.EventManager.Instance.PostEvent("Play_Balloon_Explode", m_ballGO);
         Destroy(m_ballGO);
         RespawnBall();
+
+        Debug.Log("Balloon has beed destroyed");
     }
     public void RespawnBall()
     {
         m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
+        Debug.Log("new ballonspawned");
     }
 }

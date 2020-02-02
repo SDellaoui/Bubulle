@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    private Rigidbody2D m_currentBall;
+    private GameObject m_currentBall;
 
     public float _goalRadius = 0.5f;
     public float _centerSpeed = 0.8f;
@@ -21,8 +21,8 @@ public class Goal : MonoBehaviour
     {
         if(m_currentBall != null)
         {
-            m_currentBall.position = Vector2.MoveTowards(m_currentBall.position, (Vector2)transform.position, _centerSpeed * Time.deltaTime);
-            if(Vector2.Distance(m_currentBall.position, (Vector2)transform.position) < 0.1f)
+            m_currentBall.transform.position = Vector3.MoveTowards(m_currentBall.transform.position, (Vector2)transform.position, _centerSpeed * Time.deltaTime);
+            if(Vector2.Distance(m_currentBall.transform.position, (Vector2)transform.position) < 0.1f)
             {
                 GameManager.Instance.Win();
                 m_currentBall = null;
@@ -41,7 +41,7 @@ public class Goal : MonoBehaviour
             if (Vector3.Distance(collision.transform.position, transform.position) < _goalRadius && !ballBHV.IsInGoal)
             {
                 ballBHV.IsInGoal = true;
-                m_currentBall = ballRB;
+                m_currentBall = collision.gameObject;
             }
         }
     }

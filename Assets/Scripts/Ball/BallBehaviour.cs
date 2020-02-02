@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
 {
-    #region Singleton
-    public static BallBehaviour Instance;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    #endregion
-
     private Rigidbody2D m_rb;
     private bool m_isPushed;
     
@@ -36,6 +20,10 @@ public class BallBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(IsInGoal)
+        {
+            m_rb.velocity = Vector2.zero;
+        }
         // Force Ballon to avoid going faster than the max speed limit
         if (m_rb.velocity.magnitude > _maxSpeed)
             m_rb.velocity = m_rb.velocity.normalized * _maxSpeed;

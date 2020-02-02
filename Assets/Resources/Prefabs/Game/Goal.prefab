@@ -133,4 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc49ed06318280f458dbcf76f6adc706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _goalRadius: 0.4
+  _goalRadius: 0.8
+  _centerSpeed: 1.5
+  _ballMaxSpeed: 0.25
