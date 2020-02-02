@@ -131,7 +131,7 @@ MonoBehaviour:
     type: 3}
   _dartSpawner: {fileID: 411168694444172900}
   _isActive: 1
-  _dartSpawnInterval: 0.5
+  _dartSpawnInterval: 1.5
 --- !u!61 &5821863542010229616
 BoxCollider2D:
   m_ObjectHideFlags: 0
