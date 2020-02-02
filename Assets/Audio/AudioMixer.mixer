@@ -62,6 +62,7 @@ AudioMixerGroupController:
   m_Pitch: 281a9432890b0fe4e80d9a602fdab24e
   m_Send: 00000000000000000000000000000000
   m_Effects:
+  - {fileID: -3534214793069696981}
   - {fileID: -8629464729594835447}
   - {fileID: -4286502875014003658}
   m_UserColorIndex: 0
@@ -112,6 +113,28 @@ AudioMixerEffectController:
   m_EffectName: Attenuation
   m_MixLevel: dd1613757eb93504aa456343d27c71b2
   m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-3534214793069696981
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: d24d228843bda8446b4c4fa56b1d0688
+  m_EffectName: Compressor
+  m_MixLevel: d446064e3f7dd9b4f82e8714a5a74094
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: 919b060054f312242bfaf522f304f3c8
+  - m_ParameterName: Attack
+    m_GUID: 01ca902f4278c9540b90e27d67c233ee
+  - m_ParameterName: Release
+    m_GUID: 4334c5ed6500d4f43b1e9948c8b2a168
+  - m_ParameterName: Make up gain
+    m_GUID: 7fb50972034761d4f91d1d69d2241155
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -202,7 +225,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 82e8f2eb87da6fa44ae50d89fddcb87a
   m_FloatValues:
-    063f5f107bc981b42a5ac99bbd52a246: 2
+    063f5f107bc981b42a5ac99bbd52a246: 2.41
     0bb89921f6c0be4499576acd56837aa3: 1
     25c391730ecbda242bff74c2b66e7171: 0
     2f8c01833c2020e4f9032d1ccad1bd20: 0
@@ -211,14 +234,14 @@ AudioMixerSnapshotController:
     4df0a6c6bb4172849a29323f95b732f7: 1.1999993
     06d95c87bb92aa241bc381a9451a89ef: -2.5738313
     89577b97080773143b62c45819ca0ecf: 0
-    179f5a285b8c0e245b43f63f4feeb737: 0.003
+    179f5a285b8c0e245b43f63f4feeb737: 0.001
     211063a8d7860c14d97e27eaa394b3b8: 14.5
     ba1ce5b8a8e207443b47d8d1b2380d1c: 0
-    5390d22c3f148384480b208c8af0c0a2: -5.7224774
+    5390d22c3f148384480b208c8af0c0a2: -3.8468575
     61ec062c37fc929429137df99503fd72: -5.7224774
-    9b6a044ef6ef6d04ca8a038c72f516ab: 0.218
+    9b6a044ef6ef6d04ca8a038c72f516ab: 0.09
     bd454fae6ab2fd94782b88b149ba1186: 1
-    e155b26f6a4ebe341b89480ee199f3c9: -18.3
+    e155b26f6a4ebe341b89480ee199f3c9: -12.3
   m_TransitionOverrides: {}
 --- !u!244 &678121951754736035
 AudioMixerEffectController:
