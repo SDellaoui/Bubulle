@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
+    private Rigidbody2D m_currentBall;
+
+    public float _goalRadius = 0.5f;
+    public float _centerSpeed = 0.8f;
+    public float _ballMaxSpeed = 0.25f;
 
     // Start is called before the first frame update
     void Start()
@@ -14,17 +19,29 @@ public class Goal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(m_currentBall != null)
+        {
+            m_currentBall.position = Vector2.MoveTowards(m_currentBall.position, (Vector2)transform.position, _centerSpeed * Time.deltaTime);
+            if(Vector2.Distance(m_currentBall.position, (Vector2)transform.position) < 0.1f)
+            {
+                GameManager.Instance.Win();
+                m_currentBall = null;
+            }
+        }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Collider layer is Ball
         if(collision.gameObject.layer == 9)
         {
-            if (Vector3.Distance(collision.transform.position, transform.position) < 0.2f)
+            Rigidbody2D ballRB = collision.gameObject.GetComponent<Rigidbody2D>();
+            BallBehaviour ballBHV = collision.gameObject.GetComponent<BallBehaviour>();
+
+            if (Vector3.Distance(collision.transform.position, transform.position) < _goalRadius && !ballBHV.IsInGoal)
             {
-                Destroy(collision.gameObject);
-                GameManager.Instance.Win();
+                ballBHV.IsInGoal = true;
+                m_currentBall = ballRB;
             }
         }
     }

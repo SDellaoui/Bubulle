@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     #region Private Fields
     private GameObject m_playerGO;
+    private GameObject m_ballGO;
     #endregion
 
     public GameObject _playerPrefab;
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     {
         
         m_playerGO = GameObject.Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
-        GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
+        m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
 
         _camera.SetTarget(m_playerGO);
 
@@ -47,15 +48,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            foreach(GameObject b in GameObject.FindGameObjectsWithTag("Ball"))
+            {
+                Destroy(b);
+            }
+            RespawnBall();
+        }
     }
     public void Win()
     {
         Debug.Log("Victory Brudaaaaah ! ");
         Fabric.EventManager.Instance.PostEvent("Game_Level_Complete");
+        DestroyBalloon(false);
+        RespawnBall();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void DestroyBalloon(bool explode = true)
+    {
+        if (m_ballGO == null)
+            return;
+
+        if (explode)
+            Fabric.EventManager.Instance.PostEvent("Play_Balloon_Explode", m_ballGO);
+        Destroy(m_ballGO);
+        RespawnBall();
     }
     public void RespawnBall()
     {
-        GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
+        m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
     }
 }

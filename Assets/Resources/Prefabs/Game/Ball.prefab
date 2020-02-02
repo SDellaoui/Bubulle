@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 398472815228808778}
   m_Layer: 9
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe4a2dacbbb72143967d8925acb7797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInGoal: 0
   _maxSpeed: 10
 --- !u!50 &398472815228808778
 Rigidbody2D:
