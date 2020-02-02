@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &252413521 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 252413521, guid: 5dc7f504c8c042448829e298afd6547c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4308056060083436241}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &373972127
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,12 +153,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &512869889 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3595414662980211511, guid: 0f053c85c52d29f4fa09ba9d639d7eff,
-    type: 3}
-  m_PrefabInstance: {fileID: 986110166}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,12 +3455,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &2105269561 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2105269561, guid: 5dc7f504c8c042448829e298afd6547c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4308056060083436241}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4308056060083436241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3480,46 +3462,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252413521, guid: 5dc7f504c8c042448829e298afd6547c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 44.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2105269561, guid: 5dc7f504c8c042448829e298afd6547c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 48.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _playerPrefab
-      value: 
-      objectReference: {fileID: 1918335485103915169, guid: 55a34dbbfd38b7b4f8546c664f18e707,
-        type: 3}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _ballPrefab
-      value: 
-      objectReference: {fileID: 3122356310824617430, guid: 7f9b95917b14f9b4f9b557d4cf1b10cb,
-        type: 3}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _playerSpawnPoint
-      value: 
-      objectReference: {fileID: 2105269561}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _ballSpawnPoint
-      value: 
-      objectReference: {fileID: 252413521}
     - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
         type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 519420030}
-    - target: {fileID: 3581245868699048162, guid: 5dc7f504c8c042448829e298afd6547c,
-        type: 3}
-      propertyPath: _objectiveTarget
-      value: 
-      objectReference: {fileID: 512869889}
     - target: {fileID: 4308056059539170562, guid: 5dc7f504c8c042448829e298afd6547c,
         type: 3}
       propertyPath: m_LocalPosition.x
