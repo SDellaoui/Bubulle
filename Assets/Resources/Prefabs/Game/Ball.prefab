@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe4a2dacbbb72143967d8925acb7797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ballRenderer: {fileID: 2454572860075586147}
   IsInGoal: 0
   _maxSpeed: 10
 --- !u!50 &398472815228808778
@@ -193,6 +194,7 @@ GameObject:
   - component: {fileID: 4031048269450927004}
   - component: {fileID: 338088644400923811}
   - component: {fileID: 3545528055842712763}
+  - component: {fileID: 2454572860075586147}
   m_Layer: 9
   m_Name: Ball_Sprite
   m_TagString: Untagged
@@ -285,3 +287,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2454572860075586147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190644875687728285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a14ccf09e86cc40b6ffba70a19f321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

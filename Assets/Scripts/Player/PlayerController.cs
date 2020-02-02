@@ -6,8 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D m_rb;
     private Vector2 m_currentLookDirection;
-    private bool m_isBlowing = false;
-    private bool m_hasBlownOnce = false;
 
     public GameObject _aimGameObject;
 
@@ -19,14 +17,11 @@ public class PlayerController : MonoBehaviour
 
     [Range(10,90)]
     public float _blowAngle = 10;
+
     [Range(1, 6)]
     public float _blowMaxDistance = 2f;
+
     public LayerMask mask;
-
-    public Animator headAnimator;
-
-    private int _blowAnimationId = Animator.StringToHash("IsBlowing");
-
     private Camera _mainCamera;
     
     // Start is called before the first frame update
@@ -68,42 +63,25 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateBlowBall()
     {
-        if(Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0))
+            return;
+        
+        Vector3 position = transform.position;
+            
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(mask);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)position, -_aimGameObject.transform.right, _blowMaxDistance, mask, 0f);
+            
+        if (!hit.collider)
         {
-            headAnimator.SetBool(_blowAnimationId, true);
-            if(!m_isBlowing)
-                Fabric.EventManager.Instance.PostEvent("Play_Ghost_Blow", gameObject);
-            m_isBlowing = true;
-            m_hasBlownOnce = true;
-
-
-            Vector3 position = transform.position;
+            return;
+        }
             
-            ContactFilter2D filter = new ContactFilter2D();
-            filter.SetLayerMask(mask);
-            RaycastHit2D hit = Physics2D.Raycast((Vector2)position, -_aimGameObject.transform.right, _blowMaxDistance, mask, 0f);
-            
-            if (!hit.collider)
-            {
-                return;
-            }
-            
-            Vector3 colliderPosition = hit.collider.transform.position;
+        Vector3 colliderPosition = hit.collider.transform.position;
                 
-            Vector2 blowDirection = (((Vector2)colliderPosition - hit.point) + (Vector2)(colliderPosition - position)).normalized;
-            float blowFactor = 1 - (Vector3.Distance(colliderPosition, position) / _blowMaxDistance);
-            hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
-
-            
-        }
-        else
-        {
-            headAnimator.SetBool(_blowAnimationId, false);
-
-            if(m_hasBlownOnce)
-                Fabric.EventManager.Instance.PostEvent("Stop_Ghost_Blow", gameObject);
-            m_isBlowing = false;
-        }
+        Vector2 blowDirection = (((Vector2)colliderPosition - hit.point) + (Vector2)(colliderPosition - position)).normalized;
+        float blowFactor = 1 - (Vector3.Distance(colliderPosition, position) / _blowMaxDistance);
+        hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
     }
     
     void OnDrawGizmos()

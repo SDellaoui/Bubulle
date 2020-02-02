@@ -52,33 +52,24 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.R))
         {
-            DestroyBalloon(false);
+            DestroyBalloon();
         }
     }
     public void Win()
     {
-        Debug.Log("Victory Brudaaaaah ! ");
         Fabric.EventManager.Instance.PostEvent("Game_Level_Complete");
-        DestroyBalloon(false);
-        //RespawnBall();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        DestroyBalloon();
     }
-    public void DestroyBalloon(bool explode = true)
+    public void DestroyBalloon()
     {
         if (m_ballGO == null)
             return;
-
-        if (explode)
-            Fabric.EventManager.Instance.PostEvent("Play_Balloon_Explode", m_ballGO);
         Destroy(m_ballGO);
         RespawnBall();
-
-        Debug.Log("Balloon has beed destroyed");
     }
     public void RespawnBall()
     {
         m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
-        Debug.Log("new ballonspawned");
     }
 
     IEnumerator CameraFollowPlayer()

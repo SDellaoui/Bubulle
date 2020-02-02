@@ -6,7 +6,9 @@ public class BallBehaviour : MonoBehaviour
 {
     private Rigidbody2D m_rb;
     private bool m_isPushed;
-    
+
+
+    public BallRenderer _ballRenderer;
     public bool IsInGoal = false;
     // Start is called before the first frame update
 
@@ -46,14 +48,9 @@ public class BallBehaviour : MonoBehaviour
         m_rb.AddForceAtPosition(direction, position);
         m_isPushed = true;
     }
-    private void OnDestroy()
-    {
-        //GameManager.Instance.RespawnBall();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameManager.Instance.DestroyBalloon();
+        _ballRenderer.Explode();
     }
 
 }
