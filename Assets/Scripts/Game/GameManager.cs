@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         Debug.Log("Victory Brudaaaaah ! ");
+        Fabric.EventManager.Instance.PostEvent("Game_Level_Complete");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void RespawnBall()

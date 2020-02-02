@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D m_rb;
     private Vector2 m_currentLookDirection;
+    private bool m_isBlowing = false;
+    private bool m_hasBlownOnce = false;
 
     public GameObject _aimGameObject;
 
@@ -69,7 +71,12 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButton(0))
         {
             headAnimator.SetBool(_blowAnimationId, true);
-            
+            if(!m_isBlowing)
+                Fabric.EventManager.Instance.PostEvent("Play_Ghost_Blow", gameObject);
+            m_isBlowing = true;
+            m_hasBlownOnce = true;
+
+
             Vector3 position = transform.position;
             
             ContactFilter2D filter = new ContactFilter2D();
@@ -86,10 +93,16 @@ public class PlayerController : MonoBehaviour
             Vector2 blowDirection = (((Vector2)colliderPosition - hit.point) + (Vector2)(colliderPosition - position)).normalized;
             float blowFactor = 1 - (Vector3.Distance(colliderPosition, position) / _blowMaxDistance);
             hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
+
+            
         }
         else
         {
             headAnimator.SetBool(_blowAnimationId, false);
+
+            if(m_hasBlownOnce)
+                Fabric.EventManager.Instance.PostEvent("Stop_Ghost_Blow", gameObject);
+            m_isBlowing = false;
         }
     }
     
