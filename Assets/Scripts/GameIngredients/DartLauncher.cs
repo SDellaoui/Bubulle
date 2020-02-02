@@ -24,8 +24,10 @@ public class DartLauncher : MonoBehaviour
     IEnumerator SpawnDart()
     {
         GameObject.Instantiate(_dartPrefab, _dartSpawner.position, Quaternion.identity);
+        Fabric.EventManager.Instance.PostEvent("Play_DartLauncher_Shoot", gameObject);
+        Fabric.EventManager.Instance.PostEvent("Play_DartLauncher_Reload", gameObject);
         yield return new WaitForSeconds(_dartSpawnInterval);
-        if(_isActive)
+        if (_isActive)
             StartCoroutine("SpawnDart");
         yield return null;
     }

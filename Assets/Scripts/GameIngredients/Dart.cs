@@ -19,6 +19,7 @@ public class Dart : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Fabric.EventManager.Instance.PostEvent("Play_Dart_Impact", gameObject);
         Destroy(gameObject);
     }
 }
