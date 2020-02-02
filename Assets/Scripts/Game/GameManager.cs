@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
         GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
 
         _camera.SetTarget(m_playerGO);
+
+        Fabric.EventManager.Instance.PostEvent("Game_Start");
     }
 
     // Update is called once per frame
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Victory Brudaaaaah ! ");
         Fabric.EventManager.Instance.PostEvent("Game_Level_Complete");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void RespawnBall()
     {

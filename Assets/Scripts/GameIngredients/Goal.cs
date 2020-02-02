@@ -22,7 +22,10 @@ public class Goal : MonoBehaviour
         if(collision.gameObject.layer == 9)
         {
             if (Vector3.Distance(collision.transform.position, transform.position) < 0.2f)
+            {
+                Destroy(collision.gameObject);
                 GameManager.Instance.Win();
+            }
         }
     }
 }

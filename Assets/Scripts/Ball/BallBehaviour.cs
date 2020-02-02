@@ -26,9 +26,13 @@ public class BallBehaviour : MonoBehaviour
         m_rb.AddForceAtPosition(direction, position);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnDestroy()
     {
         GameManager.Instance.RespawnBall();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         Fabric.EventManager.Instance.PostEvent("Play_Balloon_Explode", gameObject);
         Destroy(gameObject);
     }
