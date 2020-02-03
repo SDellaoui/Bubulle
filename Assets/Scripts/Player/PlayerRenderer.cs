@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class PlayerRenderer : MonoBehaviour
 {
-    private Rigidbody2D m_rb;
-    private float m_speed;
+    private PlayerController m_playerController;
+    //private float m_speed;
     private int m_blowAnimationId;
     private bool m_isBlowing;
+    private float m_blowBarScale;
+    private float m_blowBarFadeInTime = 0.1f;
+    private float m_blowBarFadeOutTime = 0.2f;
 
     //public GameObject _renderer;
     public SpriteRenderer _playerHead;
     public SpriteRenderer _playerBody;
-    public Animator headAnimator;
+    public Animator _headAnimator;
+
+    public SpriteRenderer _blowBar;
 
     
 
     // Start is called before the first frame update
     void Start()
     {
-        m_rb = GetComponent<Rigidbody2D>();
-        m_speed = GetComponent<PlayerController>()._speed;
+        m_playerController = GetComponent<PlayerController>();
         m_blowAnimationId = Animator.StringToHash("IsBlowing");
+
+        m_blowBarScale = _blowBar.transform.localScale.x;
+        
 }
 
     // Update is called once per frame
@@ -34,19 +41,33 @@ public class PlayerRenderer : MonoBehaviour
 
 
         //Update Blow Animation & sound
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !m_playerController.m_isRecoveringFullBlow)
         {
-            headAnimator.SetBool(m_blowAnimationId, true);
+            _headAnimator.SetBool(m_blowAnimationId, true);
             if (!m_isBlowing)
                 Fabric.EventManager.Instance.PostEvent("Play_Ghost_Blow", gameObject);
             m_isBlowing = true;
+            //_blowBar.color = new Color(_blowBar.color.r, _blowBar.color.g, _blowBar.color.b, _blowBar.color.a + (0.1f * Time.deltaTime));
+
+            UpdateBlowBar(true);
         }
         else
         {
-            headAnimator.SetBool(m_blowAnimationId, false);
+            _headAnimator.SetBool(m_blowAnimationId, false);
             if (m_isBlowing)
                 Fabric.EventManager.Instance.PostEvent("Stop_Ghost_Blow", gameObject);
+
+            //_blowBar.color = new Color(_blowBar.color.r, _blowBar.color.g, _blowBar.color.b, _blowBar.color.a - (0.1f * Time.deltaTime));
             m_isBlowing = false;
+
+            UpdateBlowBar(false);
         }
+    }
+    void UpdateBlowBar(bool blow = false)
+    {
+        _blowBar.transform.localScale = new Vector3(m_blowBarScale * m_playerController.m_currentBlowPercentTime, _blowBar.transform.localScale.y, _blowBar.transform.localScale.z);
+
+        float colorAlpha = (m_playerController.m_currentBlowPercentTime == 1)? 0 : 1;
+        _blowBar.color = new Color(_blowBar.color.r, _blowBar.color.g, _blowBar.color.b, colorAlpha);
     }
 }

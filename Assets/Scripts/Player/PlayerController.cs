@@ -6,6 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D m_rb;
     private Vector2 m_currentLookDirection;
+    private float m_currentBlowTime;
+    
+    [HideInInspector]
+    public bool m_isRecoveringFullBlow;
+    [HideInInspector]
+    public float m_currentBlowPercentTime;
 
     public GameObject _aimGameObject;
 
@@ -14,6 +20,13 @@ public class PlayerController : MonoBehaviour
 
     [Range(1, 20)]
     public float _blowForce = 5;
+
+    [Range(1, 20)]
+    public float _blowMaxTime = 5f;
+
+    [Range(1, 20)]
+    public float _blowRecoverTime = 3f;
+
 
     [Range(10,90)]
     public float _blowAngle = 10;
@@ -37,6 +50,7 @@ public class PlayerController : MonoBehaviour
         UpdateControls();
         UpdateDirection();
         UpdateBlowBall();
+        UpdateBlowStatus();
     }
 
     private void UpdateControls()
@@ -60,12 +74,11 @@ public class PlayerController : MonoBehaviour
         m_currentLookDirection = (Vector2)mousePos;
         _aimGameObject.transform.right = -((Vector3)m_currentLookDirection - transform.position).normalized;
     }
-
     private void UpdateBlowBall()
     {
-        if (!Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0) || m_isRecoveringFullBlow)
             return;
-        
+
         Vector3 position = transform.position;
             
         ContactFilter2D filter = new ContactFilter2D();
@@ -83,7 +96,28 @@ public class PlayerController : MonoBehaviour
         float blowFactor = 1 - (Vector3.Distance(colliderPosition, position) / _blowMaxDistance);
         hit.collider.gameObject.GetComponent<BallBehaviour>().Push(blowDirection * _blowForce, hit.point);
     }
-    
+
+    private void UpdateBlowStatus()
+    {
+        //float blowTime = m_currentBlowTime;
+        if (!Input.GetMouseButton(0) || m_isRecoveringFullBlow)
+        {
+            if(m_isRecoveringFullBlow)
+                m_currentBlowTime = Mathf.Clamp(m_currentBlowTime - ((_blowMaxTime / _blowRecoverTime) * Time.deltaTime), 0f, _blowMaxTime);
+            else
+                m_currentBlowTime = Mathf.Clamp(m_currentBlowTime - Time.deltaTime, 0f, _blowMaxTime);
+        }
+        else
+        {
+            m_currentBlowTime = Mathf.Clamp(m_currentBlowTime + Time.deltaTime, 0f, _blowMaxTime);
+        }
+        m_currentBlowPercentTime = 1-(m_currentBlowTime / _blowMaxTime);
+        if (m_currentBlowTime == _blowMaxTime)
+            m_isRecoveringFullBlow = true;
+        else if (m_currentBlowTime == 0)
+            m_isRecoveringFullBlow = false;
+    }
+
     void OnDrawGizmos()
     {
         if (_mainCamera == null)
