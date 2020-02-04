@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         if (m_ballGO == null)
             return;
         Destroy(m_ballGO);
+        m_playerGO.transform.position = _playerSpawnPoint.position;
         RespawnBall();
     }
     public void RespawnBall()

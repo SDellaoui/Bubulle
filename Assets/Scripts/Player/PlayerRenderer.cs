@@ -5,12 +5,9 @@ using UnityEngine;
 public class PlayerRenderer : MonoBehaviour
 {
     private PlayerController m_playerController;
-    //private float m_speed;
     private int m_blowAnimationId;
     private bool m_isBlowing;
     private float m_blowBarScale;
-    private float m_blowBarFadeInTime = 0.1f;
-    private float m_blowBarFadeOutTime = 0.2f;
 
     //public GameObject _renderer;
     public SpriteRenderer _playerHead;
@@ -47,7 +44,6 @@ public class PlayerRenderer : MonoBehaviour
             if (!m_isBlowing)
                 Fabric.EventManager.Instance.PostEvent("Play_Ghost_Blow", gameObject);
             m_isBlowing = true;
-            //_blowBar.color = new Color(_blowBar.color.r, _blowBar.color.g, _blowBar.color.b, _blowBar.color.a + (0.1f * Time.deltaTime));
 
             UpdateBlowBar(true);
         }
@@ -57,7 +53,6 @@ public class PlayerRenderer : MonoBehaviour
             if (m_isBlowing)
                 Fabric.EventManager.Instance.PostEvent("Stop_Ghost_Blow", gameObject);
 
-            //_blowBar.color = new Color(_blowBar.color.r, _blowBar.color.g, _blowBar.color.b, _blowBar.color.a - (0.1f * Time.deltaTime));
             m_isBlowing = false;
 
             UpdateBlowBar(false);

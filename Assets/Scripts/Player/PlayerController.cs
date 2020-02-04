@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D m_rb;
     private Vector2 m_currentLookDirection;
     private float m_currentBlowTime;
-    
+    private LayerMask mask;
+
     [HideInInspector]
     public bool m_isRecoveringFullBlow;
     [HideInInspector]
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     [Range(1, 6)]
     public float _blowMaxDistance = 2f;
 
-    public LayerMask mask;
+    
     private Camera _mainCamera;
     
     // Start is called before the first frame update
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         m_rb = GetComponent<Rigidbody2D>();
         _mainCamera = Camera.main;
+        mask = LayerMask.GetMask("Ball");
     }
 
     // Update is called once per frame
@@ -81,8 +83,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 position = transform.position;
             
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(mask);
+        //ContactFilter2D filter = new ContactFilter2D();
+        //filter.SetLayerMask(mask);
         RaycastHit2D hit = Physics2D.Raycast((Vector2)position, -_aimGameObject.transform.right, _blowMaxDistance, mask, 0f);
             
         if (!hit.collider)
