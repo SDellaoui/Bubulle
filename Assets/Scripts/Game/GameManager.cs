@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     public void RespawnBall()
     {
         m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
-        m_playerGO.transform.position = _playerSpawnPoint.position;
+        m_playerGO.GetComponent<PlayerController>().ResetState();
     }
 
     IEnumerator CameraFollowPlayer()

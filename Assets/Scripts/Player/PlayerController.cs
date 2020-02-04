@@ -120,6 +120,13 @@ public class PlayerController : MonoBehaviour
             m_isRecoveringFullBlow = false;
     }
 
+    public void ResetState()
+    {
+        transform.position = GameManager.Instance._playerSpawnPoint.position;
+        m_isRecoveringFullBlow = false;
+        m_currentBlowTime = 0f;
+    }
+
     void OnDrawGizmos()
     {
         if (_mainCamera == null)
