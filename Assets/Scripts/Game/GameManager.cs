@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour
         if (m_ballGO == null)
             return;
         Destroy(m_ballGO);
-        m_playerGO.transform.position = _playerSpawnPoint.position;
         RespawnBall();
     }
     public void RespawnBall()
     {
         m_ballGO = GameObject.Instantiate(_ballPrefab, _ballSpawnPoint.position, Quaternion.identity);
+        m_playerGO.transform.position = _playerSpawnPoint.position;
     }
 
     IEnumerator CameraFollowPlayer()
