@@ -63,6 +63,7 @@ public class PlayerRenderer : MonoBehaviour
         _blowBar.transform.localScale = new Vector3(m_blowBarScale * m_playerController.m_currentBlowPercentTime, _blowBar.transform.localScale.y, _blowBar.transform.localScale.z);
 
         float colorAlpha = (m_playerController.m_currentBlowPercentTime == 1)? 0 : 1;
-        _blowBar.color = new Color(_blowBar.color.r, _blowBar.color.g, _blowBar.color.b, colorAlpha);
+        float color = (m_playerController.m_isRecoveringFullBlow) ? 0.8f : 1;
+        _blowBar.color = new Color(color, color, color, colorAlpha);
     }
 }
